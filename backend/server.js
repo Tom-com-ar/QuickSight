@@ -9,6 +9,8 @@ import { setIO } from './src/queues/workers/eventWorker.js';
 import eventsRoutes from './src/routes/events.routes.js';
 import analyticsRoutes from './src/routes/analytics.routes.js';
 import monitorRoutes from './src/routes/monitor.routes.js';
+import { setAlertIO } from './src/queues/workers/alertWorker.js';
+
 
 // Iniciar workers
 import './src/queues/workers/eventWorker.js';
@@ -19,6 +21,8 @@ const httpServer = createServer(app);
 // Socket.io
 const io = new Server(httpServer, { cors: { origin: '*' } });
 setIO(io);
+setAlertIO(io);
+
 
 app.use(cors());
 app.use(express.json());
